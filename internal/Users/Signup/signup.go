@@ -14,7 +14,7 @@ type Signup struct {
 	Last_name  string
 	Email      string
 	Password   string
-	Price      int
+	// Price      int
 }
 
 func SIGNUP(s_up Signup) {
@@ -35,10 +35,10 @@ func SIGNUP(s_up Signup) {
 		fmt.Printf("Password:\t")
 		fmt.Scanln(&s_up.Password)
 	}
-	fmt.Printf("Price:\t")
-	fmt.Scanln(&s_up.Price)
+	// fmt.Printf("Price:\t")
+	// fmt.Scanln(&s_up.Price)
 
-	nm = append(nm, s_up.First_name, s_up.Last_name, s_up.Email, s_up.Password, fmt.Sprintf("%d", s_up.Price))
+	nm = append(nm, s_up.First_name, s_up.Last_name, s_up.Email, s_up.Password)
 
 	fileName := "/home/abduazim/Projects/Golang/book/users.txt"
 
@@ -100,29 +100,28 @@ func product(s_up Signup) {
 	fmt.Scanln(&num)
 
 	cnt := 0
+	var slc []string
 	for _, work := range arr {
 		natija := strings.Split(work, " ")
 		if natija[0] == num {
-			if price, err := strconv.Atoi(natija[2]); err == nil && price <= s_up.Price {
-				fmt.Println("Nechta olmoqchisiz ", natija[1])
-				fmt.Scanln(&cnt)
-
-				s_up.Price = s_up.Price - (price * cnt)
-				fmt.Println("Sizning hisobizda ", s_up.Price, "mablag' bor")
-			} else {
-				fmt.Println("Hisobizda mag'lag' yetarli emas!!!")
-				num := 0
-				fmt.Println("Boshqa narsa olishni hohlaysizmi")
-				fmt.Println("[1] HA\t[2]Yo'q")
-				fmt.Scanln(&num)
-				if num == 1 {
-					product(s_up)
-				} else {
-					return
+			fmt.Println("Siz ",natija[1]," kitobni olishni xohlaysizmi?")
+			fmt.Println("[1]HA\t[2]Yoq")
+			fmt.Scanln(&cnt)
+			if cnt==1{
+				son,err:=strconv.Atoi(natija[2])
+				if err!=nil{
+					fmt.Println("Integerga olishga xatolik bor!!!!")
 				}
+				sentence:=natija[0]+natija[1]+strconv.Itoa(son-1)
+				slc=append(slc, sentence)
+				continue
+			}else{
+				product(s_up)
 			}
+			slc=append(slc, work)
 		}
 	}
+
 
 }
 
