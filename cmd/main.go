@@ -5,6 +5,7 @@ import (
 	signup "Book/internal/Users/Signup"
 	signin "Book/internal/Users/Signin"
 	admin "Book/internal/Admin"
+	book "Book/internal/Users/Book"
 )
 
 func main(){
@@ -21,6 +22,7 @@ func main(){
 		}else if num2==2{
 			signin.Sign_in()
 		}
+		book.Book()
 	case 2:
 		admin.Admin()
 	default:
